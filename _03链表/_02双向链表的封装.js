@@ -131,7 +131,7 @@ function DoublyLinkedList() {
   }
 
   //update方法
-  DoublyLinkedList.prototype.update = function (position, data) {
+  DoublyLinkedList.prototype.update = function (position, newData) {
     //越界判断
     if (position < 0 || position >= this.length) return false
     //获取元素,两种方式，通过位置进行选择
@@ -146,7 +146,75 @@ function DoublyLinkedList() {
       index = 0
       while (index++ < position) current = current.next
     }
-    current.data = data
+    current.data = newData
+  }
+
+  //removeAt方法
+  DoublyLinkedList.prototype.removeAt = function (position) {
+    //越界判断
+    if (position < 0 || position >= this.length) return null
+    //删除数据
+    var current = null
+    if (this.length === 1) {
+      current = this.head
+      this.head = null
+      this.tail = null
+    } else {
+      if (position === 0) {
+        current = this.head
+        this.head.next.prev = null
+        this.head = this.head.next
+      } else if (position === this.length - 1) {
+        current = this.tail
+        this.tail.prev.next = null
+        this.tail = this.tail.prev
+      } else {
+        //判断位置
+        //获取元素,两种方式，通过位置进行选择
+        var index = 0
+        if (position > this.length / 2) {
+          current = this.tail
+          index = this.length - 1
+          while (index-- > position) current = current.prev
+        } else {
+          current = this.head
+          index = 0
+          while (index++ < position) current = current.next
+        }
+        current.prev.next = current.next
+        current.next.prev = current.prev
+        current.prev = null
+        current.next = null
+      }
+      this.length -= 1
+      return current.data
+    }
+  }
+
+  //remove方法
+  DoublyLinkedList.prototype.remove = function (data) {
+    var index = this.indexOf(data)
+    return this.removeAt(index)
+  }
+
+  //isEmpty方法
+  DoublyLinkedList.prototype.isEmpty = function () {
+    return this.length === 0
+  }
+
+  //size方法
+  DoublyLinkedList.prototype.size = function () {
+    return this.length
+  }
+
+  //获取链表的第一个元素
+  DoublyLinkedList.prototype.getHead = function () {
+    return this.head.data
+  }
+
+  //获取链表的最后一个元素
+  DoublyLinkedList.prototype.getTail = function () {
+    return this.tail.data
   }
 }
 
@@ -157,13 +225,19 @@ list.append('cba')
 list.append('nba')
 
 list.insert(0, '123')
-list.insert(4, '456')
-list.insert(1, '789')
-list.update(1,'111')
-console.log(list.get(1))
-console.log(list.get(4))
-console.log(list.indexOf('111'))
-console.log(list.backWardString());
-console.log(list.toString());
-console.log(list.forwardString());
+list.insert(1, '456')
+list.insert(4, '789')
+list.update(1, '111')
+console.log('get--', list.get(1))
+console.log('get--', list.get(4))
+console.log('removeAt--', list.removeAt(0));
+console.log('remove--', list.remove('nba'));
+console.log('indexOf--', list.indexOf('111'))
+console.log('backWardString--', list.backWardString());
+console.log('toString--', list.toString());
+console.log('forwardString--', list.forwardString());
+console.log('isEmpty--', list.isEmpty());
+console.log('size--', list.size());
+console.log('getHead--', list.getHead());
+console.log('getTail--', list.getTail());
 
