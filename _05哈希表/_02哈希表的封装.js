@@ -149,6 +149,8 @@ function HashTable() {
     return num
   }
 
+
+
 }
 
 var hash = new HashTable()
