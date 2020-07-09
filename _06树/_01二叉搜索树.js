@@ -127,7 +127,7 @@ function BinarySearchTree() {
   }
 
   //删除操作,较复杂
-  BinarySearchTree.prototype.delete = function (key) {
+  BinarySearchTree.prototype.remove = function (key) {
 
     //当前节点
     var current = this.root
@@ -194,11 +194,42 @@ function BinarySearchTree() {
     }
     //3.有两个子节点
     if (current.left !== null && current.right !== null) {
+      // 1.获取后继节点
+      var successor = this.getSuccessor(current)
 
-      //两个子节点
+      // 2.判断是否是根节点
+      if (current === this.root) {
+        this.root = successor
+      } else if (isLeftChild) {
+        parent.left = successor
+      } else {
+        parent.right = successor
+      }
+
+      // 3.将删除节点的左子树赋值给successor
+      successor.left = current.left
+    }
+    return true
+  }
+  // 找后继的方法
+  BinarySearchTree.prototype.getSuccessor = function (delNode) {
+    // 1.使用变量保存临时的节点
+    var successorParent = delNode
+    var successor = delNode
+    var current = delNode.right // 要从右子树开始找
+
+    // 2.寻找节点
+    while (current != null) {
+      successorParent = successor
+      successor = current
+      current = current.left
     }
 
-
+    // 3.如果是删除图中15的情况, 还需要如下代码
+    if (successor != delNode.right) {
+      successorParent.left = successorParent.right
+      successor.right = delNode.right
+    }
   }
 }
 
@@ -243,4 +274,14 @@ console.log('最小值', bst.min())
 console.log('搜索key值：3', bst.search(3))
 console.log('搜索key值：25', bst.search(25))
 console.log('搜索key值：26', bst.search(26))
+
+console.log('删除节点',bst.remove(10))
+console.log('删除节点',bst.remove(18))
+
+var midResult = ""
+bst.midOrderTraversal(item => {
+  midResult += item + " "
+})
+console.log("中序遍历", midResult)
+
 
