@@ -275,8 +275,9 @@ console.log('搜索key值：3', bst.search(3))
 console.log('搜索key值：25', bst.search(25))
 console.log('搜索key值：26', bst.search(26))
 
-console.log('删除节点',bst.remove(10))
-console.log('删除节点',bst.remove(18))
+console.log('删除节点', bst.remove(10))
+console.log('删除节点', bst.remove(18))
+console.log('删除节点', bst.remove(20))
 
 var midResult = ""
 bst.midOrderTraversal(item => {
