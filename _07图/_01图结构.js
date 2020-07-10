@@ -165,7 +165,20 @@ function Graph() {
     }
   }
 
-  // dfs的递归调用方法
+  //深度优先搜索 DFS Depth-First Search
+  Graph.prototype.dfs = function (handler) {
+    // 1.初始化颜色
+    var color = this.initializeColor()
+
+    // 2.遍历所有的顶点, 开始访问
+    for (var i = 0; i < this.vertexes.length; i++) {
+      if (color[this.vertexes[i]] === "white") {
+        this.dfsVisit(this.vertexes[i], color, handler)
+      }
+    }
+  }
+
+  // 递归调用方法
   Graph.prototype.dfsVisit = function (u, color, handler) {
     // 1.将u的颜色设置为灰色
     color[u] = "gray"
@@ -188,18 +201,6 @@ function Graph() {
     color[u] = "black"
   }
 
-  //深度优先搜索 DFS Depth-First Search
-  Graph.prototype.dfs = function (handler) {
-    // 1.初始化颜色
-    var color = this.initializeColor()
-
-    // 2.遍历所有的顶点, 开始访问
-    for (var i = 0; i < this.vertexes.length; i++) {
-      if (color[this.vertexes[i]] === "white") {
-        this.dfsVisit(this.vertexes[i], color, handler)
-      }
-    }
-  }
 }
 
 var graph = new Graph()
