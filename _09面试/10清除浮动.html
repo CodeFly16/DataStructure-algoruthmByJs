@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .clearfix:after {
+            clear: both;
+            content: '';
+            display: table;
+        }
+
+        .clearfix {
+            /*兼容IE*/
+            zoom: 1;
+        }
+    </style>
+</head>
+<body>
+<div style="border: solid 1px red" class="clearfix">
+    <div style="border: solid 1px red;float: left">123</div>
+    <div style="border: solid 1px red;float: right">123</div>
+</div>
+
+</body>
+</html>

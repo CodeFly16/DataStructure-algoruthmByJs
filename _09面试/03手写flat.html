@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //递归处理
+    function flat1(arr) {
+        let result = []
+
+        function setArray(arr) {
+            for (let item of arr) {
+                if (Array.isArray(item)) {
+                    setArray(item)
+                } else {
+                    result.push(item)
+                }
+            }
+        }
+
+        setArray(arr)
+        return result
+    }
+
+    //reduce处理
+    function flatten(arr) {
+        return arr.reduce((pre, cur) => {
+            return pre.concat(Array.isArray(cur) ? flatten(cur) : cur);
+        }, [])
+    }
+
+    let arr = [1, [2, [3, [4]]], [2, [3, [4]]]]
+    while (arr.some(Array.isArray)) {
+        console.log('...arr', [...arr])
+        arr = [].concat(...arr)
+    }
+    console.log(arr)
+    console.log(flat1([1, [2, [3, [4]]],]));
+    console.log(flatten([1, [2, [3, [4]]]]));
+</script>
+</html>

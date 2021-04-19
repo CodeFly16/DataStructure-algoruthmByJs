@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>水平居中</p>
+<div style="height: 100px;border: solid 1px red;text-align: center;position: relative">
+    <span>行内元素：text-align:center</span>
+    <div style="margin: auto">块级元素:margin: auto</div>
+    <div style="position: absolute;width: 400px;left: 50%;margin-left: -200px;">绝对定位元素:left: 50%;margin-left: -50px;
+    </div>
+</div>
+
+<p>垂直居中</p>
+<div style="height: 100px;border: solid 1px red;">
+    <span style="line-height: 100px">行内元素：height: 20px;line-height: 20px</span>
+</div>
+<div style="height: 100px;border: solid 1px red;position:relative;margin-top:5px">
+    <div style="position:absolute; height: 40px;width:500px;top: 50%;left:50%;margin: -20px 0 0 -250px;line-height: 40px">
+        绝对布局：top: 50%;left:50%;margin: -20px 0 0 -40px
+    </div>
+</div>
+
+<div style="height: 100px;border: solid 1px red;position:relative;margin-top:5px">
+    <div style="position:absolute; height: 40px;width:500px;top: 50%;left:50%;transform: translate(-50%,-50%);line-height: 40px">
+        绝对布局：top: 50%;left:50%;transform: translate(-50%,-50%)
+    </div>
+</div>
+
+<div style="height: 100px;border: solid 1px red;position:relative;margin-top:5px">
+    <div style="position:absolute; height: 40px;width:500px;top: 0;left:0;right:0;bottom:0;margin: auto;line-height: 40px">
+        绝对布局：top: 0;left:0;right:0;bottom:0;margin: auto;
+    </div>
+</div>
+</body>
+</html>

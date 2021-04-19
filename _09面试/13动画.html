@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @keyframes myFirst {
+            0%   {background: red; left:0; top:0;}
+            25%  {background: yellow; left:200px; top:0;}
+            50%  {background: blue; left:200px; top:200px;}
+            75%  {background: green; left:0; top:200px;}
+            100% {background: red; left:0; top:0;}
+        }
+        div {
+            width: 100px;
+            height: 50px;
+            position: absolute;
+
+            animation-name: myFirst;
+            animation-duration: 5s;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+</body>
+</html>
