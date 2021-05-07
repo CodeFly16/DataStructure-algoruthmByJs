@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "title": "lyf第二次测试",
+      "author": "lyf",
+      "id": 2
+    },
+    {
+      "title": "lyfPOST测试",
+      "author": "lyf",
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "body": "喜大普奔",
+      "postId": 2,
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
