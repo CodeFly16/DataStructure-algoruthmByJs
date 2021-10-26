@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传图片</title>
+</head>
+<body>
+<p>上传csv文件<input type="file" id="csv_file" name="csv_file"/></p>
+<button id="import">导入</button>
+</body>
+<script>
+    let uploadButton = document.getElementById('import')
+    uploadButton.addEventListener('click', function () {
+        let files = document.getElementById('csv_file').files[0]
+        console.log(files)
+        let data = new FormData()
+        data.append('csv_file', files);
+        let xhr = new XMLHttpRequest()
+        xhr.open('get', 'http://127.0.0.1:8080/upload')
+        xhr.send()
+        xhr.onreadystatechange = function (res) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(res)
+            }
+        }
+        console.log(data)
+    })
+</script>
+</html>

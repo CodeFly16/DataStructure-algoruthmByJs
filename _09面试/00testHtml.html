@@ -4,19 +4,104 @@
     <meta charset="utf-8">
     <title></title>
     <style>
-        .container {
+        .dialog {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #000;
+        }
+
+        .dialog:before {
+            content: '';
+            display: block;
             width: 0;
             height: 0;
-            border-top: 40px solid transparent;
-            border-left: 40px solid transparent;
-            border-right: 40px solid transparent;
-            border-bottom: 40px solid #ff0000;
+            position: relative;
+            top: 10px;
+            left: 100px;
+            border: 9px solid transparent;
+            border-left: 9px solid #000;
+        }
+
+        .dialog:after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            position: relative;
+            top: -8px;
+            left: 98px;
+            border: 9px solid transparent;
+            border-left: 9px solid #ffffff;
+        }
+
+        .nine {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-content: center;
+            width: 700px;
+            height: 700px;
+        }
+
+        .item {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000000;
         }
     </style>
 </head>
 <body>
-<div class="container">
+<!--<div class="dialog">-->
+<!--</div>-->
+<div class="nine">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
 </div>
 
 </body>
+<script>
+    Function.prototype.apply1 = function (context, arr) {
+        var context = Object(context) || window;
+        context.fn = this;
+
+        var result;
+        if (!arr) {
+            result = context.fn();
+        } else {
+            var args = [];
+            for (var i = 0, len = arr.length; i < len; i++) {
+                args.push('arr[' + i + ']');
+            }
+            result = eval('context.fn(' + args + ')')
+        }
+
+        delete context.fn
+        return result;
+    }
+
+    // 测试一下
+    var value = 2;
+    var obj = {
+        value: 1
+    }
+
+    function bar(name, age) {
+        console.log(this.value);
+        return {
+            value: this.value,
+            name: name,
+            age: age
+        }
+    }
+
+    bar.apply1(null); // 2
+    console.log(bar.apply1(obj, 'kevin', 18));
+</script>
 </html>

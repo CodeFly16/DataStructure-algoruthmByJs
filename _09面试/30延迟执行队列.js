@@ -3,6 +3,7 @@ class Queue {
     constructor(queue = []) {
         this.queue = queue
         this.index = 0
+        this.timer = null
     }
 
     task(time, fn) {
@@ -13,16 +14,25 @@ class Queue {
     start() {
         //递归执行
         if (this.index < this.queue.length) {
-            setTimeout(() => {
+            this.timer = setTimeout(() => {
                 this.queue[this.index].fn()
                 this.index++
                 this.start()
             }, this.queue[this.index].time)
         }
     }
+
+    stop() {
+        setTimeout(() => {
+            clearTimeout(this.timer)
+            this.timer = null
+        })
+
+    }
 }
 
-new Queue()
+let q = new Queue()
+q
     .task(1000, () => {
         console.log(1)
     })
@@ -33,3 +43,4 @@ new Queue()
         console.log(3)
     })
     .start()
+

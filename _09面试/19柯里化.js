@@ -7,7 +7,7 @@ const curry = (fn, arr = []) => {// arr就是我们要收集每次调用时传�
         let newArgs = [...arr, ...args] // 收集每次传入的参数
 
         // 如果传入的参数个数等于我们指定的函数参数个数，就执行指定的真正函数
-        if (newArgs.length === len) {
+        if (newArgs.length >= len) {
             return fn(...newArgs)
         } else {
             // 递归收集参数
@@ -16,13 +16,17 @@ const curry = (fn, arr = []) => {// arr就是我们要收集每次调用时传�
     }
 }
 
-const curry_add = (...a) => {
-    let sum = a.reduce((pre, cur) => pre + cur, 0)
-    const item = (...b) => {
-        sum += b.reduce((pre, cur) => pre + cur, 0)
-        return item
-    }
-    item.toString = () => sum
-    return item
-}
-console.log(curry_add(1)(2, 3)(4).toString()); // 10
+// const curry_add = (...a) => {
+//     let sum = a.reduce((pre, cur) => pre + cur, 0)
+//     const item = (...b) => {
+//         sum += b.reduce((pre, cur) => pre + cur, 0)
+//         return item
+//     }
+//     item.toString = () => sum
+//     return item
+// }
+// console.log(curry_add(1)(2, 3)(4).toString()); // 10
+let fn = curry((a, b, c, d) => {
+    return a + b + c + d;
+})
+console.log(fn(3)(4, 5, 1, 2));

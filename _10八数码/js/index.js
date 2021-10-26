@@ -24,32 +24,39 @@ $(function () {
         end_node = start_end_node.end_node;
 
         //判断是否可达
-
         if (isCanReach(start_node.values, end_node.values)) {
-            //更正初始节点的启发值
-            h(start_node, end_node);
-            //更正初始节点的评估值
-            f(start_node);
+            console.log(start_node.values)
+            console.log(end_node.values)
+            if (JSON.stringify(start_node.values) === JSON.stringify(end_node.values)) {
+                alert("初始节点与目标节点相同")
+            } else {
+                //更正初始节点的启发值
+                h(start_node, end_node);
+                //更正初始节点的评估值
+                f(start_node);
 
-            //第一次扩展初始节点
-            open_list.push(start_node);//初始节点写进open表
-            expandNode(start_node, end_node, open_list, close_list);//扩展初始节点
-            sortOpenList(open_list);//重排open表
+                //第一次扩展初始节点
+                open_list.push(start_node);//初始节点写进open表
+                expandNode(start_node, end_node, open_list, close_list);//扩展初始节点
+                sortOpenList(open_list);//重排open表
 
-            //判断是否到达目标节点
-            //是则输出
-            //否则继续扩展节点
-            ifReachEnd(start_node, end_node, open_list, close_list, result);
-            //输出最佳路径
-            for (var i = result.length - 1; i >= 0; i--) {
-                //将节点中的'0'去掉
-                for (var j = result[i].values.length - 1; j >= 0; j--) {
-                    if (result[i].values[j] == 0) {
-                        result[i].values[j] = '';
+
+                //判断是否到达目标节点
+                //是则输出
+                //否则继续扩展节点
+                ifReachEnd(start_node, end_node, open_list, close_list, result);
+                //输出最佳路径
+                for (var i = result.length - 1; i >= 0; i--) {
+                    //将节点中的'0'去掉
+                    for (var j = result[i].values.length - 1; j >= 0; j--) {
+                        if (result[i].values[j] == 0) {
+                            result[i].values[j] = '';
+                        }
                     }
+                    printNode(result[i]);
                 }
-                printNode(result[i]);
             }
+
         } else {
             alert("节点不可达")
         }
@@ -134,7 +141,7 @@ function g(cur, par) {
 function h(cur, end) {
     var differ = 0;
     for (var i = 0; i < 9; i++) {
-        if (cur.values[i] != end.values[i]) {
+        if (cur.values[i] !== end.values[i]) {
             differ++;
         }
     }
@@ -341,7 +348,6 @@ function ifReachEnd(start_node, end_node, open_list, close_list, result) {
         expandNode(cur_node, end_node, open_list, close_list);
         //重排open_list
         sortOpenList(open_list);
-
         ifReachEnd(start_node, end_node, open_list, close_list, result);
     }
 }
@@ -376,20 +382,19 @@ function printNode(node) {
 function isCanReach(start_node, end_node) {
     var count1 = 0;
     var count2 = 0;
-    for (var i = 0; i < (start_node.length - 1); i++) {
-        for (j = i + 1; j < start_node.length; j++) {
+    for (let i = 0; i < (start_node.length - 1); i++) {
+        for (let j = i + 1; j < start_node.length; j++) {
             if (start_node[i] > start_node[j] && start_node[i] * start_node[j] !== 0)
                 count1++;
         }
     }
-    ;
-    for (var i = 0; i < (end_node.length - 1); i++) {
-        for (j = i + 1; j < end_node.length; j++) {
+    for (let i = 0; i < (end_node.length - 1); i++) {
+        for (let j = i + 1; j < end_node.length; j++) {
             if (end_node[i] > end_node[j] && end_node[i] * end_node[j] !== 0)
                 count2++;
         }
     }
-    if (count1 % 2 != count2 % 2) {
+    if (count1 % 2 !== count2 % 2) {
         return 0
     }
     return 1

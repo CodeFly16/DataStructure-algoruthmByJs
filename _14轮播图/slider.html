@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div#A {
+            width: 100%;
+            height: 300px;
+            margin-right: 20px;
+            float: left;
+            margin-bottom: 20px;
+        }
+
+        div#B {
+            width: 100%;
+            height: 300px;;
+            margin-right: 20px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+<div id="A"></div>
+<div id="B"></div>
+<!-- 引入一个外部JS资源 -->
+<script src="slider.js"></script>
+<script>
+    let container = document.getElementById('A');
+    let container1 = document.getElementById('B');
+    let imgList = [
+        {
+            url: './img/1.jpg',
+            href: 'https://www.baidu.com'
+        },
+        {
+            url: './img/2.jpg',
+            href: 'https://www.jd.com'
+        },
+        {
+            url: './img/3.jpg',
+            href: 'https://www.taobao.com'
+        }
+    ]
+    new Slider({container, imgList, delayTime: 2}).init();
+    new Slider({container: container1, imgList: imgList, delayTime: 2, time: 3, dotColor: 'green'}).init();
+</script>
+</body>
+
+</html>
