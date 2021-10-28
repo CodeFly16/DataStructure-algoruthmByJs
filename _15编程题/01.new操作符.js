@@ -6,11 +6,12 @@
 // 5.返回 obj , 如果是一个对象，我们就返回这个对象，如果没有，我们该返回什么就返回什么
 
 function objectFactory() {
-    let obj = {};
+    let obj = {}
     let Constructor = [].shift.apply(arguments);
     obj.__proto__ = Constructor.prototype;
-    let ret = Constructor.apply(obj, arguments);
-    return typeof ret === 'object' ? ret : obj
+    let ret = Constructor.apply(obj, arguments)
+    return typeof ret === 'object' ? ret : obj;
+
 }
 
 function Otaku(name, age) {

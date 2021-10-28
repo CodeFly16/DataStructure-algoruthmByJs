@@ -1,8 +1,8 @@
 // 有参数限制
 function curry(fn, arr = []) {
     let len = fn.length;
-    return function (...args) {
-        let newArgs = [...arr, ...args]
+    return function () {
+        let newArgs = [...arr, ...arguments]
         if (newArgs.length >= len) {
             return fn(...newArgs)
         } else {

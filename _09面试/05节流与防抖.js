@@ -29,3 +29,4 @@ function throttle(fn, delay) {
 function fn1() {
     console.log(123)
 }
+
